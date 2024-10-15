@@ -1,10 +1,8 @@
-import {
-  type DefaultUser,
-  type NextAuthOptions,
-  getServerSession,
-} from 'next-auth';
+import { PrismaAdapter } from '@auth/prisma-adapter';
+import type { DefaultUser, NextAuthOptions } from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
+import { prisma } from './db';
 
 declare module 'next-auth' {
   interface Session {
@@ -21,26 +19,8 @@ declare module 'next-auth/jwt' {
 }
 
 export const authOptions: NextAuthOptions = {
+  adapter: PrismaAdapter(prisma),
   providers: [
-    // CredentialsProvider({
-    // 	name: "Credentials",
-    // 	credentials: {
-    // 		username: { label: "Username", type: "text" },
-    // 		password: { label: "Password", type: "text" },
-    // 	},
-    // 	async authorize(credentials, req) {
-    // 		// check email exist
-    // 		const user = await db.user.findUnique({
-    // 			where: {
-    // 				username: credentials?.username,
-    // 				password: credentials?.password,
-    // 			},
-    // 		})
-    // 		if (user) {
-    // 			return user
-    // 		}
-    // 	},
-    // }),
     GithubProvider({
       clientId: process.env.GITHUB_ID!,
       clientSecret: process.env.GITHUB_SECRET!,
@@ -51,22 +31,6 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    // signIn: async ({ user }) => {
-    //   // check user exist on database
-    //   const exist = await db.user.findFirst({ where: { id: user.id } })
-    //   if (exist) return true
-    //   // create user
-    //   await db.user.create({
-    //     data: {
-    //       id: user.id,
-    //       name: user.name!,
-    //       email: user.email!,
-    //       image: user.image!,
-    //       username: user.id,
-    //     },
-    //   })
-    //   return true
-    // },
     session: async ({ session, token }) => {
       if (session?.user) {
         session.user.id = token.uid;
@@ -88,12 +52,7 @@ export const authOptions: NextAuthOptions = {
     strategy: 'jwt',
   },
   pages: {
-    signIn: '/sign-in',
+    signIn: '/login',
     error: '/api/auth/error',
   },
-};
-
-export const getUserSession = async () => {
-  const session = await getServerSession(authOptions);
-  return session?.user || null;
 };
