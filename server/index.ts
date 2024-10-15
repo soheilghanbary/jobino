@@ -14,10 +14,6 @@ app.use(
   }),
 );
 // routes
-const apiRoutes = app.basePath('/api').get('/hello', (c) => {
-  return c.json({
-    message: 'Hello Nix.JS!',
-  });
-});
+const apiRoutes = app.basePath('/api');
 
 export type ApiRoutes = typeof apiRoutes;
