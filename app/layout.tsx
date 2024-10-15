@@ -31,8 +31,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <QueryProvider>
           <ThemeProvider
             attribute="class"
-            enableColorScheme
             defaultTheme="light"
+            enableColorScheme
           >
             {children}
             <ToastProvider />
