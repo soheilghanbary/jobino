@@ -1,23 +1,17 @@
 import '@/assets/app.css';
+import { font } from '@/assets/font';
 import { QueryProvider } from '@/components/providers/query-provider';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { ToastProvider } from '@/components/providers/toast-provider';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import type { PropsWithChildren } from 'react';
-
-const font = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  weight: ['400', '500', '600', '700', '800', '900'],
-});
 
 export const metadata: Metadata = {
   title: {
-    default: 'Nix',
-    template: '%s - nix',
+    default: 'Jobino',
+    template: '%s - jobino',
   },
-  description: 'The minimal full stack starter',
+  description: 'The Job Board Platform',
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon-16x16.png',
@@ -27,7 +21,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="fa" dir="rtl" suppressHydrationWarning>
       <head>
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/icon.png" />
