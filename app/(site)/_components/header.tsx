@@ -1,23 +1,27 @@
-import { Pickaxe } from 'lucide-react';
+import { Logo } from '@/components/logo';
+import { buttonVariants } from '@/components/ui/button';
+import { getUserBySession } from '@/server/auth';
+import { PieChart } from 'lucide-react';
 import Link from 'next/link';
 import { LoginModal } from './login-modal';
 
-const Logo = () => (
-  <Link
-    href={'/'}
-    className="inline-flex items-center gap-2 font-black text-lg text-primary"
-  >
-    <Pickaxe className="size-5" />
-    جابینو
-  </Link>
-);
-
-export function SiteHeader() {
+export async function SiteHeader() {
+  const user = await getUserBySession();
   return (
     <header>
       <nav className="container flex items-center justify-between gap-2 p-4">
         <Logo />
-        <LoginModal />
+        {user ? (
+          <Link
+            href={'/dashboard'}
+            className={buttonVariants({ variant: 'secondary' })}
+          >
+            <PieChart className="size-4" />
+            داشبورد
+          </Link>
+        ) : (
+          <LoginModal />
+        )}
       </nav>
     </header>
   );
