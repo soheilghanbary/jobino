@@ -1,6 +1,8 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { logger } from 'hono/logger';
+import { JobRoute } from './routes/job-route';
+import { UserRoute } from './routes/user-route';
 
 export const app = new Hono();
 // middlewares
@@ -14,6 +16,9 @@ app.use(
   }),
 );
 // routes
-const apiRoutes = app.basePath('/api');
+const apiRoutes = app
+  .basePath('/api')
+  .route('/user', UserRoute)
+  .route('/jobs', JobRoute);
 
 export type ApiRoutes = typeof apiRoutes;
