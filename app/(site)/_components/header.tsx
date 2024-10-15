@@ -1,5 +1,4 @@
-import { Button } from '@/components/ui/button';
-import { LogInIcon, Pickaxe } from 'lucide-react';
+import { Pickaxe } from 'lucide-react';
 import Link from 'next/link';
 import { LoginModal } from './login-modal';
 
@@ -15,7 +14,7 @@ const Logo = () => (
 
 export function SiteHeader() {
   return (
-    <header className="border-separate border-b">
+    <header>
       <nav className="container flex items-center justify-between gap-2 p-4">
         <Logo />
         <LoginModal />
