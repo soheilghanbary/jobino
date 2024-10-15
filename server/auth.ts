@@ -1,5 +1,9 @@
 import { PrismaAdapter } from '@auth/prisma-adapter';
-import type { DefaultUser, NextAuthOptions } from 'next-auth';
+import {
+  type DefaultUser,
+  type NextAuthOptions,
+  getServerSession,
+} from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import { prisma } from './db';
@@ -31,20 +35,24 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    session: async ({ session, token }) => {
-      if (session?.user) {
-        session.user.id = token.uid;
-      }
-      return session;
+    session: ({ session, token }) => {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: token.uid,
+        },
+      };
     },
-    jwt: async ({ token, user, trigger, session }) => {
+    jwt: ({ token, user }) => {
       if (user) {
-        token.uid = user.id;
+        const u = user as unknown as any;
+        return {
+          ...token,
+          uid: u.id,
+        };
       }
-      if (trigger === 'update') {
-        return { ...token, ...session.user };
-      }
-      return { ...token, ...user };
+      return token;
     },
   },
   secret: process.env.NEXTAUTH_SECRET,
@@ -55,4 +63,14 @@ export const authOptions: NextAuthOptions = {
     signIn: '/login',
     error: '/api/auth/error',
   },
+};
+
+export const getUserBySession = async () => {
+  const session = await getServerSession(authOptions);
+  return session?.user as {
+    id: string;
+    name: string;
+    email: string;
+    image: string;
+  };
 };

@@ -22,6 +22,7 @@ import {
 import { useMediaQuery } from '@/hooks/use-media-query';
 import { cn } from '@/lib/utils';
 import { LogInIcon } from 'lucide-react';
+import { signIn } from 'next-auth/react';
 import * as React from 'react';
 
 export function LoginModal() {
@@ -77,13 +78,38 @@ export function LoginModal() {
 }
 
 function OAuth({ className }: React.ComponentProps<'form'>) {
+  const [loading, setLoading] = React.useState({
+    github: false,
+    google: false,
+  });
+
+  const onSignIn = async (provider: 'google' | 'github') => {
+    setLoading({ ...loading, [provider]: true });
+    await signIn(provider);
+  };
+
   return (
     <div className={cn('grid grid-cols-2 gap-4 py-4', className)}>
-      <Button variant={'default'}>
-        <LoadingIcon className="size-4 size-5 fill-primary-foreground" />
+      <Button
+        variant={'default'}
+        disabled={loading.github}
+        onClick={() => onSignIn('github')}
+      >
+        {loading.github && (
+          <LoadingIcon className="size-5 fill-primary-foreground" />
+        )}
         گیت هاب
       </Button>
-      <Button variant={'outline'}>گوگل</Button>
+      <Button
+        variant={'outline'}
+        disabled={loading.google}
+        onClick={() => onSignIn('google')}
+      >
+        {loading.google && (
+          <LoadingIcon className="size-5 fill-primary-foreground" />
+        )}
+        گوگل
+      </Button>
     </div>
   );
 }
