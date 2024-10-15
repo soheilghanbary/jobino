@@ -1,4 +1,5 @@
 'use client';
+import { LoadingIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -78,7 +79,10 @@ export function LoginModal() {
 function OAuth({ className }: React.ComponentProps<'form'>) {
   return (
     <div className={cn('grid grid-cols-2 gap-4 py-4', className)}>
-      <Button variant={'default'}>گیت هاب</Button>
+      <Button variant={'default'}>
+        <LoadingIcon className="size-4 size-5 fill-primary-foreground" />
+        گیت هاب
+      </Button>
       <Button variant={'outline'}>گوگل</Button>
     </div>
   );
