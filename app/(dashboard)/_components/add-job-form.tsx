@@ -1,7 +1,9 @@
 'use client';
+import { SelectField } from '@/components/select-field';
 import { TextField } from '@/components/text-field';
 import { TextFieldArea } from '@/components/text-field-area';
 import { Button } from '@/components/ui/button';
+import { salaryItems, timeItems } from '@/config/job';
 import { type AddJobSchema, addJobSchema } from '@/schema/index';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { Category } from '@prisma/client';
@@ -17,6 +19,9 @@ export function AddJobForm({ items }: { items: Category[] }) {
     formState: { errors },
   } = useForm<AddJobSchema>({
     resolver: zodResolver(addJobSchema),
+    defaultValues: {
+      userId: '',
+    },
   });
   const onSubmit = handleSubmit((data) => console.log(data));
   return (
@@ -24,21 +29,36 @@ export function AddJobForm({ items }: { items: Category[] }) {
       onSubmit={onSubmit}
       className="grid gap-4 md:grid-cols-2 lg:grid-cols-3"
     >
-      <TextField label="عنوان شغلی" {...register('title')} />
-      <TextField label="نام شرکت" {...register('company')} />
-      <TextField label="آدرس وبسایت" {...register('website')} />
+      <TextField
+        label="عنوان شغلی"
+        {...register('title')}
+        error={errors.title?.message}
+      />
+      <TextField
+        label="نام شرکت"
+        {...register('company')}
+        error={errors.company?.message}
+      />
+      <TextField
+        label="آدرس وبسایت"
+        {...register('website')}
+        error={errors.website?.message}
+      />
       <SelectCategory label="دسته بندی" items={items} />
-      <TextField label="نوع همکاری" {...register('time')} />
-      <TextField label="حقوق" {...register('salary')} />
+      <SelectField label="حقوق" items={salaryItems} />
+      <SelectField label="نوع همکاری" items={timeItems} />
       <UploadLogo upload={(e) => setValue('logo', e)} />
       <TextFieldArea
         rows={6}
         className="md:col-span-2 lg:col-span-3"
         label="توضیحات"
         {...register('description')}
+        error={errors.description?.message}
       />
       <div className="inline-flex w-fit items-center gap-4">
-        <Button type="submit">افزودن شغل</Button>
+        <Button onClick={onSubmit} type="button">
+          افزودن شغل
+        </Button>
         <Button type="button" variant={'secondary'}>
           انصراف
         </Button>

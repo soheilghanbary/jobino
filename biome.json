@@ -30,8 +30,14 @@
           "fix": "safe",
           "level": "warn",
           "options": {
-            "attributes": ["classList"],
-            "functions": ["clsx", "cva", "tw"]
+            "attributes": [
+              "classList"
+            ],
+            "functions": [
+              "clsx",
+              "cva",
+              "tw"
+            ]
           }
         }
       },
@@ -46,7 +52,8 @@
         "useExhaustiveDependencies": "off"
       },
       "a11y": {
-        "noSvgWithoutTitle": "off"
+        "noSvgWithoutTitle": "off",
+        "useKeyWithClickEvents": "off"
       }
     }
   }

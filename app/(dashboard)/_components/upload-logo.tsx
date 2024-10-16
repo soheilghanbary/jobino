@@ -41,7 +41,7 @@ export function UploadLogo({ upload }: Props) {
     setFile(files[0]);
     const res = await onUpload(files[0]);
     setImageKey(res.Key);
-    upload('res.Location');
+    upload(res.Location);
     toast.success('لوگو با موفقیت آپلود شد!');
   }, []);
 
@@ -62,6 +62,7 @@ export function UploadLogo({ upload }: Props) {
       <div className="grid gap-2 [&>label]:text-sm">
         <Label>لوگوی شرکت</Label>
         <Button
+          type="button"
           variant={'outline'}
           className={cn(
             'text-xs',
@@ -69,14 +70,13 @@ export function UploadLogo({ upload }: Props) {
           )}
           {...getRootProps()}
         >
-          <input {...getInputProps()} />
+          <input type="hidden" {...getInputProps()} />
           <UploadIcon className="size-3.5" />
           بارگذاری فایل
         </Button>
       </div>
       {!!file && (
-        <button
-          type="button"
+        <figure
           className="relative mt-2 size-16 rounded-md border bg-muted/40 shadow-sm ring-destructive ring-offset-1 duration-100 hover:ring-1 active:scale-90"
           onClick={onDeleteFile}
         >
@@ -89,7 +89,7 @@ export function UploadLogo({ upload }: Props) {
             )}
             src={URL.createObjectURL(file)}
           />
-        </button>
+        </figure>
       )}
     </section>
   );
