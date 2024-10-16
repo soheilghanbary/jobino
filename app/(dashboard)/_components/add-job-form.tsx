@@ -9,7 +9,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import type { Category } from '@prisma/client';
 import { useForm } from 'react-hook-form';
 import { SelectCategory } from './select-category';
-import { UploadLogo } from './upload-logo';
 
 export function AddJobForm({ items }: { items: Category[] }) {
   const {
@@ -20,7 +19,7 @@ export function AddJobForm({ items }: { items: Category[] }) {
   } = useForm<AddJobSchema>({
     resolver: zodResolver(addJobSchema),
     defaultValues: {
-      userId: '',
+      logo: '',
     },
   });
   const onSubmit = handleSubmit((data) => console.log(data));
@@ -47,7 +46,7 @@ export function AddJobForm({ items }: { items: Category[] }) {
       <SelectCategory label="دسته بندی" items={items} />
       <SelectField label="حقوق" items={salaryItems} />
       <SelectField label="نوع همکاری" items={timeItems} />
-      <UploadLogo upload={(e) => setValue('logo', e)} />
+      {/* <UploadLogo upload={(e) => setValue('logo', e)} /> */}
       <TextFieldArea
         rows={6}
         className="md:col-span-2 lg:col-span-3"
@@ -56,9 +55,7 @@ export function AddJobForm({ items }: { items: Category[] }) {
         error={errors.description?.message}
       />
       <div className="inline-flex w-fit items-center gap-4">
-        <Button onClick={onSubmit} type="button">
-          افزودن شغل
-        </Button>
+        <Button onClick={() => onSubmit()}>افزودن شغل</Button>
         <Button type="button" variant={'secondary'}>
           انصراف
         </Button>
