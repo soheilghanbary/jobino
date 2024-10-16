@@ -10,6 +10,6 @@ export const addJobSchema = z.object({
   description: z.string().min(1, 'توضیحات شغل الزامی است'),
   salary: z.string().min(1, 'اطلاعات حقوق الزامی است'),
   time: z.string().min(1, 'زمان کار الزامی است'),
-  categoryId: z.string().uuid('شناسه دسته‌بندی باید یک UUID معتبر باشد'),
-  userId: z.string().uuid('شناسه کاربر باید یک UUID معتبر باشد'),
+  categoryId: z.string().min(1, 'دسته بندی الزامی است'),
+  userId: z.string(),
 });
