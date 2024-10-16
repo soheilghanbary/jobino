@@ -11,13 +11,15 @@ import type { Category } from '@prisma/client';
 type Props = {
   label: string;
   items: Category[];
+  onChange: (value: string) => void;
+  error?: string;
 };
 
-export function SelectCategory({ label, items }: Props) {
+export function SelectCategory({ label, items, error, onChange }: Props) {
   return (
     <div className="grid gap-2 [&>label]:text-sm">
       <Label>{label}</Label>
-      <Select dir="rtl">
+      <Select dir="rtl" onValueChange={onChange}>
         <SelectTrigger>
           <SelectValue />
         </SelectTrigger>
@@ -29,6 +31,9 @@ export function SelectCategory({ label, items }: Props) {
           ))}
         </SelectContent>
       </Select>
+      {!!error && (
+        <span className="font-medium text-destructive text-xs">{error}</span>
+      )}
     </div>
   );
 }

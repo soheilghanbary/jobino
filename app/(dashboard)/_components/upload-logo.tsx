@@ -10,6 +10,7 @@ import toast from 'react-hot-toast';
 
 type Props = {
   upload: (value: string) => void;
+  error?: string;
 };
 
 const s3 = new S3({
@@ -33,7 +34,7 @@ const removeFile = async (key: string) => {
     .promise();
 };
 
-export function UploadLogo({ upload }: Props) {
+export function UploadLogo({ upload, error }: Props) {
   const [file, setFile] = useState<File>();
   const [imageKey, setImageKey] = useState('');
 
@@ -54,6 +55,7 @@ export function UploadLogo({ upload }: Props) {
     setImageKey('');
     setFile(undefined);
     await removeFile(imageKey);
+    upload('');
     toast.error('لوگو حذف شد!');
   };
 
@@ -74,6 +76,9 @@ export function UploadLogo({ upload }: Props) {
           <UploadIcon className="size-3.5" />
           بارگذاری فایل
         </Button>
+        {!!error && (
+          <span className="font-medium text-destructive text-xs">{error}</span>
+        )}
       </div>
       {!!file && (
         <figure

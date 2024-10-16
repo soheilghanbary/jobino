@@ -10,13 +10,15 @@ import {
 type Props = {
   label: string;
   items: { value: string; label: string }[];
+  onChange: (value: string) => void;
+  error?: string;
 };
 
-export function SelectField({ label, items }: Props) {
+export function SelectField({ label, items, error, onChange }: Props) {
   return (
     <div className="grid gap-2 [&>label]:text-sm">
       <Label>{label}</Label>
-      <Select dir="rtl">
+      <Select dir="rtl" onValueChange={onChange}>
         <SelectTrigger>
           <SelectValue />
         </SelectTrigger>
@@ -28,6 +30,9 @@ export function SelectField({ label, items }: Props) {
           ))}
         </SelectContent>
       </Select>
+      {!!error && (
+        <span className="font-medium text-destructive text-xs">{error}</span>
+      )}
     </div>
   );
 }

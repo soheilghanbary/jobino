@@ -1,7 +1,5 @@
 import { z } from 'zod';
 
-export type AddJobSchema = z.infer<typeof addJobSchema>;
-
 export const addJobSchema = z.object({
   company: z.string().min(1, 'نام شرکت الزامی است'),
   logo: z.string().min(1, 'لوگوی شرکت الزامی است'),
@@ -13,3 +11,5 @@ export const addJobSchema = z.object({
   categoryId: z.string().min(1, 'دسته بندی الزامی است'),
   userId: z.string(),
 });
+
+export type AddJobSchema = z.infer<typeof addJobSchema>;

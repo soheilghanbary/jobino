@@ -7,55 +7,133 @@ import { salaryItems, timeItems } from '@/config/job';
 import { type AddJobSchema, addJobSchema } from '@/schema/index';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { Category } from '@prisma/client';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { SelectCategory } from './select-category';
+import { UploadLogo } from './upload-logo';
 
-export function AddJobForm({ items }: { items: Category[] }) {
+type Props = {
+  items: Category[];
+  userId: string;
+};
+
+export function AddJobForm({ items, userId }: Props) {
   const {
-    register,
+    control, // اضافه کردن control برای استفاده در Controller
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm<AddJobSchema>({
     resolver: zodResolver(addJobSchema),
     defaultValues: {
       logo: '',
+      categoryId: '',
+      salary: '',
+      time: '',
+      description: '',
+      title: '',
+      company: '',
+      website: '',
+      userId,
     },
   });
+
   const onSubmit = handleSubmit((data) => console.log(data));
+
   return (
     <form
       onSubmit={onSubmit}
       className="grid gap-4 md:grid-cols-2 lg:grid-cols-3"
     >
-      <TextField
-        label="عنوان شغلی"
-        {...register('title')}
-        error={errors.title?.message}
+      <Controller
+        name="title"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            label="عنوان شغلی"
+            error={errors.title?.message}
+            {...field}
+          />
+        )}
       />
-      <TextField
-        label="نام شرکت"
-        {...register('company')}
-        error={errors.company?.message}
+      <Controller
+        name="company"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            label="نام شرکت"
+            error={errors.company?.message}
+            {...field}
+          />
+        )}
       />
-      <TextField
-        label="آدرس وبسایت"
-        {...register('website')}
-        error={errors.website?.message}
+      <Controller
+        name="website"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            label="آدرس وبسایت"
+            error={errors.website?.message}
+            {...field}
+          />
+        )}
       />
-      <SelectCategory label="دسته بندی" items={items} />
-      <SelectField label="حقوق" items={salaryItems} />
-      <SelectField label="نوع همکاری" items={timeItems} />
-      {/* <UploadLogo upload={(e) => setValue('logo', e)} /> */}
-      <TextFieldArea
-        rows={6}
-        className="md:col-span-2 lg:col-span-3"
-        label="توضیحات"
-        {...register('description')}
-        error={errors.description?.message}
+      <Controller
+        name="categoryId"
+        control={control}
+        render={({ field }) => (
+          <SelectCategory
+            items={items}
+            label="دسته بندی"
+            error={errors.categoryId?.message}
+            onChange={field.onChange}
+          />
+        )}
+      />
+      <Controller
+        name="salary"
+        control={control}
+        render={({ field }) => (
+          <SelectField
+            label="حقوق"
+            items={salaryItems}
+            error={errors.salary?.message}
+            onChange={field.onChange}
+          />
+        )}
+      />
+      <Controller
+        name="time"
+        control={control}
+        render={({ field }) => (
+          <SelectField
+            label="نوع همکاری"
+            items={timeItems}
+            error={errors.time?.message}
+            onChange={field.onChange}
+          />
+        )}
+      />
+      <Controller
+        name="logo"
+        control={control}
+        render={({ field }) => (
+          <UploadLogo upload={field.onChange} error={errors.logo?.message} />
+        )}
+      />
+      <Controller
+        name="description"
+        control={control}
+        render={({ field }) => (
+          <TextFieldArea
+            rows={6}
+            className="md:col-span-2 lg:col-span-3"
+            label="توضیحات"
+            error={errors.description?.message}
+            {...field}
+          />
+        )}
       />
       <div className="inline-flex w-fit items-center gap-4">
-        <Button onClick={() => onSubmit()}>افزودن شغل</Button>
+        <Button type="submit">افزودن شغل</Button>
         <Button type="button" variant={'secondary'}>
           انصراف
         </Button>
