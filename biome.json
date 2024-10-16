@@ -30,14 +30,8 @@
           "fix": "safe",
           "level": "warn",
           "options": {
-            "attributes": [
-              "classList"
-            ],
-            "functions": [
-              "clsx",
-              "cva",
-              "tw"
-            ]
+            "attributes": ["classList"],
+            "functions": ["clsx", "cva", "tw"]
           }
         }
       },
