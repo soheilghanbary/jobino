@@ -71,7 +71,7 @@
 
 @layer components {
   .editor {
-    @apply flex min-h-[140px] w-full rounded-md border border-input bg-transparent p-4 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>.tiptap]:w-full;
+    @apply flex min-h-[140px] w-full rounded-md border border-input bg-transparent p-4 pt-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>.tiptap]:w-full;
 
     p {
       @apply text-sm/8 text-foreground/85 tracking-wide;
