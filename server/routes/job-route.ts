@@ -1,4 +1,4 @@
-import prisma from '@/server/db';
+import { prisma } from '@/server/db';
 import { Hono } from 'hono';
 
 export const JobRoute = new Hono()

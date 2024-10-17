@@ -1,13 +1,17 @@
 'use client';
+import { LoadingIcon } from '@/components/icons';
 import { SelectField } from '@/components/select-field';
 import { TextField } from '@/components/text-field';
 import { TextFieldArea } from '@/components/text-field-area';
 import { Button } from '@/components/ui/button';
 import { salaryItems, timeItems } from '@/config/job';
+import { useAddJob } from '@/hooks/use-job';
 import { type AddJobSchema, addJobSchema } from '@/schema/index';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { Category } from '@prisma/client';
+import { useRouter } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { SelectCategory } from './select-category';
 import { UploadLogo } from './upload-logo';
 
@@ -17,6 +21,8 @@ type Props = {
 };
 
 export function AddJobForm({ items, userId }: Props) {
+  const router = useRouter();
+  const { mutateAsync, isPending } = useAddJob();
   const {
     control, // اضافه کردن control برای استفاده در Controller
     handleSubmit,
@@ -36,7 +42,11 @@ export function AddJobForm({ items, userId }: Props) {
     },
   });
 
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const onSubmit = handleSubmit(async (data) => {
+    await mutateAsync(data);
+    toast.success('شغل اضافه شد');
+    router.push('/dashboard/jobs');
+  });
 
   return (
     <form
@@ -133,8 +143,13 @@ export function AddJobForm({ items, userId }: Props) {
         )}
       />
       <div className="inline-flex w-fit items-center gap-4">
-        <Button type="submit">افزودن شغل</Button>
-        <Button type="button" variant={'secondary'}>
+        <Button disabled={isPending} type="submit">
+          {isPending && (
+            <LoadingIcon className="size-4 fill-primary-foreground" />
+          )}
+          افزودن شغل
+        </Button>
+        <Button disabled={isPending} type="button" variant={'secondary'}>
           انصراف
         </Button>
       </div>

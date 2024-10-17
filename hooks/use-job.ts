@@ -1,3 +1,4 @@
+import type { AddJobSchema } from '@/schema';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export const useGetJobs = () => {
@@ -23,13 +24,13 @@ export const useGetJob = (jobId: string) => {
 export const useAddJob = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (newJob) => {
+    mutationFn: async (data: AddJobSchema) => {
       const res = await fetch('/api/jobs', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(newJob),
+        body: JSON.stringify(data),
       });
       return res.json();
     },
