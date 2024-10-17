@@ -5,6 +5,7 @@ import { getUserBySession } from '@/server/auth';
 import { prisma } from '@/server/db';
 import type { Job } from '@prisma/client';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const JobCard = (job: Job) => {
   return (
@@ -29,8 +30,8 @@ const JobCard = (job: Job) => {
         <span className="text-muted-foreground text-xs">
           {fromNow(job.createdAt)}
         </span>
-        <Button size={'sm'} variant={'secondary'}>
-          جزئیات
+        <Button asChild size={'sm'} variant={'secondary'}>
+          <Link href={`/jobs/${job.id}`}>جزئیات</Link>
         </Button>
       </div>
     </div>
@@ -48,7 +49,7 @@ const JobList = async () => {
     },
   });
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {jobs.map((j) => (
         <JobCard key={j.id} {...j} />
       ))}
