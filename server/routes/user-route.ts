@@ -1,5 +1,5 @@
+import { prisma } from '@/server/db';
 import { Hono } from 'hono';
-import prisma from '../db';
 
 export const UserRoute = new Hono().put('/:id', async (c) => {
   const id = c.req.param('id');
@@ -8,4 +8,5 @@ export const UserRoute = new Hono().put('/:id', async (c) => {
     where: { id },
     data,
   });
+  return c.json({ msg: 'User Details Updated' })
 });
