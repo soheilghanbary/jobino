@@ -37,20 +37,20 @@ export default async ({ params }: { params: { id: string } }) => {
     <section className="mx-auto max-w-screen-sm">
       <Link
         href={'/'}
-        className="mb-4 flex items-center gap-2 text-muted-foreground text-xs duration-100 hover:text-foreground"
+        className="flex items-center gap-2 text-muted-foreground text-xs duration-100 hover:text-foreground"
       >
         <ArrowRightIcon className="size-3.5" />
         همه کارها
       </Link>
-      <div className="flex items-center gap-2">
+      <div className="flex flex-col items-center gap-4 md:flex-row">
         <Image
           src={job.logo}
           alt={job.title}
-          width={50}
-          height={50}
+          width={100}
+          height={100}
           className="rounded-md"
         />
-        <div className="flex-1 space-y-0.5">
+        <div className="flex-1 space-y-0.5 text-center md:text-right">
           <h2 className="font-bold">{job.title}</h2>
           <p className="font-medium text-muted-foreground text-xs">
             {job.company}

@@ -17,7 +17,7 @@ const JobCard = (job: Job) => {
           className="rounded-md"
         />
         <div className="space-y-0.5">
-          <h2 className="font-bold">{job.title}</h2>
+          <h2 className="line-clamp-1 font-bold">{job.title}</h2>
           <p className="font-medium text-muted-foreground text-xs">
             {job.company}
           </p>

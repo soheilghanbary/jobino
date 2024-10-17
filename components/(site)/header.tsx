@@ -41,7 +41,7 @@ export async function SiteHeader() {
   const user = await getUserBySession();
   return (
     <header className="shadow-sm">
-      <nav className="container flex items-center justify-between gap-4 p-4">
+      <nav className="container flex items-center justify-between gap-4 px-4 py-2 md:py-4">
         <Logo />
         <NavLinks />
         {user ? (
