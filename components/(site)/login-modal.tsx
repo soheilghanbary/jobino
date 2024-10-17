@@ -64,12 +64,7 @@ export function LoginModal() {
             برای دسترسی به ویژگی های بیشتر لاگین کنید.
           </DrawerDescription>
         </DrawerHeader>
-        <OAuth className="px-4" />
-        <DrawerFooter className="pt-2">
-          <DrawerClose asChild>
-            <Button variant="outline">Cancel</Button>
-          </DrawerClose>
-        </DrawerFooter>
+        <OAuth className="px-4 pb-8" />
       </DrawerContent>
     </Drawer>
   );

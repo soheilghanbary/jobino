@@ -78,7 +78,7 @@ export function SendResume() {
 
 function ProfileForm() {
   return (
-    <form className="flex flex-col gap-6 px-4">
+    <form className="flex flex-col gap-4 px-4">
       <TextField label="نام و نام خانوادگی" />
       <TextField label="آدرس ایمیل" />
       <div className="grid gap-2 [&>label]:text-sm">
