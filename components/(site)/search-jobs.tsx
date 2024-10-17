@@ -11,7 +11,7 @@ export const SearchJobs = () => (
     />
     <Button
       size={'sm'}
-      variant={'default'}
+      variant={'ghost'}
       className="absolute left-2 rounded-full"
     >
       جستجو
