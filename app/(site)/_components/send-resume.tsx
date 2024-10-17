@@ -32,7 +32,7 @@ export function SendResume() {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="outline">
+          <Button variant="secondary">
             <SendIcon className="size-4" />
             ارسال رزومه
           </Button>
@@ -53,7 +53,7 @@ export function SendResume() {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant="outline">
+        <Button variant="secondary">
           <SendIcon className="size-4" />
           ارسال رزومه
         </Button>
