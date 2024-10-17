@@ -6,7 +6,7 @@ export default function SiteLayout({ children }: PropsWithChildren) {
   return (
     <>
       <SiteHeader />
-      <main className="container p-4">{children}</main>
+      <main className="container min-h-svh p-4">{children}</main>
       <SiteFooter />
     </>
   );

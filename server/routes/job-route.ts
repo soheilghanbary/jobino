@@ -60,4 +60,15 @@ export const JobRoute = new Hono()
       data,
     });
     return c.json(job);
+  })
+  .post('/:id/report', async (c) => {
+    const jobId = c.req.param('id');
+    const data = await c.req.json();
+    const report = await prisma.report.create({
+      data: {
+        jobId,
+        ...data,
+      },
+    });
+    return c.json(report);
   });

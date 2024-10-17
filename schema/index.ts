@@ -12,4 +12,12 @@ export const addJobSchema = z.object({
   userId: z.string(),
 });
 
+export const reportSchema = z.object({
+  name: z.string().min(2),
+  email: z.string().email(),
+  resume: z.string().url(),
+  jobId: z.string().min(8),
+});
+
+export type ReportSchema = z.infer<typeof reportSchema>;
 export type AddJobSchema = z.infer<typeof addJobSchema>;
