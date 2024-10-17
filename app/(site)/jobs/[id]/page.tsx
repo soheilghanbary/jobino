@@ -1,3 +1,4 @@
+import { CopyLink } from '@/components/(site)/copy-link';
 import { SendResume } from '@/components/(site)/send-resume';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -86,9 +87,7 @@ export default async ({ params }: { params: { id: string } }) => {
           <Button variant={'ghost'} size={'icon'}>
             <ShieldAlert className="size-4" />
           </Button>
-          <Button variant={'ghost'} size={'icon'}>
-            <CopyIcon className="size-4" />
-          </Button>
+          <CopyLink />
         </div>
       </div>
     </section>

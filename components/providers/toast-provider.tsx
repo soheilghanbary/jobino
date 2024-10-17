@@ -7,8 +7,12 @@ export const ToastProvider = () => {
       position="bottom-right"
       toastOptions={{
         style: {
-          fontSize: '14px',
-          fontWeight: 600,
+          fontSize: 14,
+          fontWeight: 500,
+          color: 'hsl(var(--foreground))',
+          border: '1px solid hsl(var(--border))',
+          backgroundColor: 'hsl(var(--background))',
+          borderRadius: 'var(--radius)',
         },
       }}
     />
