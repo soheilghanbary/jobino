@@ -60,7 +60,7 @@ model User {
 }
 
 // model Company {
-//   id          String   @id @default(uuid())
+//   id          String   @id @default(cuid())
 //   name        String   @unique
 //   logo        String
 //   website     String
@@ -71,13 +71,13 @@ model User {
 // }
 
 model Category {
-  id   String @id @default(uuid())
+  id   String @id @default(cuid())
   name String
   jobs Job[]
 }
 
 model Job {
-  id          String   @id @default(uuid())
+  id          String   @id @default(cuid())
   company     String   @unique
   logo        String
   website     String
@@ -95,7 +95,7 @@ model Job {
 }
 
 model Report {
-  id        String   @id @default(uuid())
+  id        String   @id @default(cuid())
   name      String
   email     String   @unique
   resume    String // .pdf url

@@ -1,8 +1,16 @@
 import { SendResume } from '@/components/(site)/send-resume';
+import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { salaryItems, timeItems } from '@/config/job';
 import { prisma } from '@/server/db';
-import { ArrowRightIcon, Banknote, ClockIcon, LayoutGrid } from 'lucide-react';
+import {
+  ArrowRightIcon,
+  Banknote,
+  ClockIcon,
+  CopyIcon,
+  LayoutGrid,
+  ShieldAlert,
+} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -67,7 +75,22 @@ export default async ({ params }: { params: { id: string } }) => {
         </p>
       </div>
       <hr className="my-6 border-border/40" />
-      <p className="text-foreground text-sm/6">{job.description}</p>
+      <div
+        className="job-description"
+        dangerouslySetInnerHTML={{ __html: job.description }}
+      />
+      <hr className="my-6 border-border/40" />
+      <div className="flex items-center justify-between gap-2">
+        <SendResume />
+        <div className="flex items-center gap-2">
+          <Button variant={'ghost'} size={'icon'}>
+            <ShieldAlert className="size-4" />
+          </Button>
+          <Button variant={'ghost'} size={'icon'}>
+            <CopyIcon className="size-4" />
+          </Button>
+        </div>
+      </div>
     </section>
   );
 };

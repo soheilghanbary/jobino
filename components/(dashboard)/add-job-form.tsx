@@ -2,7 +2,6 @@
 import { LoadingIcon } from '@/components/common/icons';
 import { SelectField } from '@/components/common/select-field';
 import { TextField } from '@/components/common/text-field';
-import { TextFieldArea } from '@/components/common/text-field-area';
 import { Button } from '@/components/ui/button';
 import { salaryItems, timeItems } from '@/config/job';
 import { useAddJob } from '@/hooks/use-job';
@@ -12,6 +11,8 @@ import type { Category } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { Tiptap } from '../common/tiptap';
+import { Label } from '../ui/label';
 import { SelectCategory } from './select-category';
 import { UploadLogo } from './upload-logo';
 
@@ -34,7 +35,7 @@ export function AddJobForm({ items, userId }: Props) {
       categoryId: '',
       salary: '',
       time: '',
-      description: '',
+      description: '<p>hello world</p>',
       title: '',
       company: '',
       website: '',
@@ -133,13 +134,10 @@ export function AddJobForm({ items, userId }: Props) {
         name="description"
         control={control}
         render={({ field }) => (
-          <TextFieldArea
-            rows={6}
-            className="md:col-span-2 lg:col-span-3"
-            label="توضیحات"
-            error={errors.description?.message}
-            {...field}
-          />
+          <div className="grid gap-2 md:col-span-2 lg:col-span-3 [&>label]:text-sm">
+            <Label>توضیحات</Label>
+            <Tiptap onChange={field.onChange} value={field.value} />
+          </div>
         )}
       />
       <div className="inline-flex w-fit items-center gap-4">

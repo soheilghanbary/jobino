@@ -8,5 +8,5 @@ export const UserRoute = new Hono().put('/:id', async (c) => {
     where: { id },
     data,
   });
-  return c.json({ msg: 'User Details Updated' })
+  return c.json({ msg: 'User Details Updated' });
 });

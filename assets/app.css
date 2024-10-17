@@ -68,3 +68,41 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .editor {
+    @apply flex min-h-[140px] w-full rounded-md border border-input bg-transparent p-4 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>.tiptap]:w-full;
+
+    p {
+      @apply text-sm/8 text-foreground/85 tracking-wide;
+    }
+
+    strong {
+      @apply text-foreground;
+    }
+
+    h2,
+    h3,
+    h4,
+    h5 {
+      @apply text-xl font-bold my-4 first:mt-0 last:mb-0;
+    }
+  }
+
+  .job-description {
+    p {
+      @apply text-sm/8 text-foreground/85 tracking-wide;
+    }
+
+    strong {
+      @apply text-foreground;
+    }
+
+    h2,
+    h3,
+    h4,
+    h5 {
+      @apply text-xl font-bold my-4 first:mt-0 last:mb-0;
+    }
+  }
+}
