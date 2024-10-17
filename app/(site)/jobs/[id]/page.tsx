@@ -58,7 +58,7 @@ export default async ({ params }: { params: { id: string } }) => {
         </div>
         <SendResume />
       </div>
-      <div className="mt-6 flex items-center gap-4">
+      <div className="mt-6 flex flex-wrap items-center gap-4">
         <p className="flex items-center gap-2 font-medium text-foreground/80 text-xs">
           <LayoutGrid className="size-4" />
           {job.category.name}
