@@ -1,10 +1,10 @@
+import { DashboardHeader } from '@/components/(dashboard)/header';
 import { Button } from '@/components/ui/button';
+import { fromNow } from '@/lib/utils';
 import { getUserBySession } from '@/server/auth';
 import { prisma } from '@/server/db';
 import type { Job } from '@prisma/client';
 import Image from 'next/image';
-import { DashboardHeader } from '../../_components/header';
-import { fromNow } from '@/lib/utils';
 
 const JobCard = (job: Job) => {
   return (

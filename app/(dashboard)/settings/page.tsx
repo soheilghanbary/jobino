@@ -1,5 +1,5 @@
-import { ModeToggle } from '@/components/mode-toggle';
-import { DashboardHeader } from '../_components/header';
+import { ModeToggle } from '@/components/common/mode-toggle';
+import { DashboardHeader } from '@/components/(dashboard)/header';
 
 export default () => {
   return (

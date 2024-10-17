@@ -1,4 +1,4 @@
-import { Logo } from '@/components/logo';
+import { Logo } from '@/components/common/logo';
 import { buttonVariants } from '@/components/ui/button';
 import { getUserBySession } from '@/server/auth';
 import {

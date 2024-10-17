@@ -1,4 +1,4 @@
-import { ModeToggle } from '@/components/mode-toggle';
+import { ModeToggle } from '@/components/common/mode-toggle';
 
 export function SiteFooter() {
   return (

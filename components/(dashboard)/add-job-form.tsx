@@ -1,8 +1,8 @@
 'use client';
-import { LoadingIcon } from '@/components/icons';
-import { SelectField } from '@/components/select-field';
-import { TextField } from '@/components/text-field';
-import { TextFieldArea } from '@/components/text-field-area';
+import { LoadingIcon } from '@/components/common/icons';
+import { SelectField } from '@/components/common/select-field';
+import { TextField } from '@/components/common/text-field';
+import { TextFieldArea } from '@/components/common/text-field-area';
 import { Button } from '@/components/ui/button';
 import { salaryItems, timeItems } from '@/config/job';
 import { useAddJob } from '@/hooks/use-job';

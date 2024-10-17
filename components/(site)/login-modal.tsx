@@ -1,5 +1,5 @@
 'use client';
-import { OAuth } from '@/components/oauth';
+import { OAuth } from '@/components/common/oauth';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,

@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from 'react';
-import { SiteHeader } from './_components/header';
-import { SiteFooter } from './_components/footer';
+import { SiteFooter } from '../../components/(site)/footer';
+import { SiteHeader } from '../../components/(site)/header';
 
 export default function SiteLayout({ children }: PropsWithChildren) {
   return (

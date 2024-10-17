@@ -1,10 +1,10 @@
+import { SendResume } from '@/components/(site)/send-resume';
 import { Separator } from '@/components/ui/separator';
 import { salaryItems, timeItems } from '@/config/job';
 import { prisma } from '@/server/db';
 import { ArrowRightIcon, Banknote, ClockIcon, LayoutGrid } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { SendResume } from '../../_components/send-resume';
 
 const getJob = async (id: string) => {
   const job = await prisma.job.findUnique({

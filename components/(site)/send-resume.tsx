@@ -1,5 +1,5 @@
 'use client';
-import { TextField } from '@/components/text-field';
+import { TextField } from '@/components/common/text-field';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,

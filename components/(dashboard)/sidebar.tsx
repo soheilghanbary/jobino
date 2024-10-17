@@ -1,5 +1,5 @@
 'use client';
-import { Logo } from '@/components/logo';
+import { Logo } from '@/components/common/logo';
 import { sidebarLinks } from '@/config/site';
 import { SidebarLink } from './sidebar-link';
 

@@ -1,12 +1,11 @@
+import { Hero } from '@/components/(site)/hero';
 import { Button } from '@/components/ui/button';
 import { fromNow } from '@/lib/utils';
-import { getUserBySession } from '@/server/auth';
 import { prisma } from '@/server/db';
 import type { Job } from '@prisma/client';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { Hero } from './_components/hero';
 
 const JobCard = (job: Job) => {
   return (
@@ -40,11 +39,7 @@ const JobCard = (job: Job) => {
 };
 
 const JobList = async () => {
-  const session = await getUserBySession();
   const jobs = await prisma.job.findMany({
-    where: {
-      userId: session.id,
-    },
     orderBy: {
       createdAt: 'desc',
     },
