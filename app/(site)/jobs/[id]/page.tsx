@@ -52,7 +52,7 @@ export default async ({ params }: { params: { id: string } }) => {
           className="rounded-md"
         />
         <div className="flex-1 space-y-0.5 text-center md:text-right">
-          <h2 className="font-bold">{job.title}</h2>
+          <h2 className="font-bold">{`استخدام ${job.title}`}</h2>
           <p className="font-medium text-muted-foreground text-xs">
             {job.company}
           </p>
