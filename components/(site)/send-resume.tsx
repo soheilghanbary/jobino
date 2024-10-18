@@ -19,16 +19,16 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/drawer';
-import { Label } from '@/components/ui/label';
 import { useAddReport } from '@/hooks/use-job';
 import { useMediaQuery } from '@/hooks/use-media-query';
 import { type ReportSchema, reportSchema } from '@/schema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FileIcon, SendIcon, UploadIcon } from 'lucide-react';
+import { SendIcon } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { UploadResume } from './upload-resume';
 
 export function SendResume() {
   const [open, setOpen] = React.useState(false);
@@ -92,12 +92,13 @@ function PersonalForm({ onClose }: PersonalFormProps) {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<ReportSchema>({
     resolver: zodResolver(reportSchema),
     defaultValues: {
       name: '',
       email: '',
-      resume: 'https://www.soheilghanbary.ir/resume.pdf',
+      resume: '',
       jobId: params.id,
     },
   });
@@ -124,16 +125,10 @@ function PersonalForm({ onClose }: PersonalFormProps) {
         error={errors.email?.message}
         {...register('email')}
       />
-      <div className="grid gap-2 [&>label]:text-sm">
-        <Label className="flex items-center gap-2">
-          <FileIcon className="size-3.5" />
-          رزومه
-        </Label>
-        <Button type="button" variant={'outline'} className="text-xs">
-          <UploadIcon className="size-3.5" />
-          آپلود رزومه .pdf
-        </Button>
-      </div>
+      <UploadResume
+        upload={(e) => setValue('resume', e)}
+        error={errors.resume?.message}
+      />
       <Button disabled={isPending} type="submit">
         ارسال درخواست
       </Button>

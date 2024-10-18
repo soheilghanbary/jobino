@@ -1,15 +1,5 @@
+import { DeleteReport } from '@/components/(dashboard)/delete-report';
 import { DashboardHeader } from '@/components/(dashboard)/header';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import {
   Table,
@@ -22,7 +12,7 @@ import {
 import { fromNow } from '@/lib/utils';
 import { getUserBySession } from '@/server/auth';
 import { prisma } from '@/server/db';
-import { Download, TrashIcon } from 'lucide-react';
+import { Download } from 'lucide-react';
 
 export default async () => {
   const session = await getUserBySession();
@@ -40,6 +30,7 @@ export default async () => {
       createdAt: true,
       job: {
         select: {
+          id: true,
           title: true,
           category: {
             select: {
@@ -85,31 +76,7 @@ export default async () => {
                       <Download className="size-4 text-blue-500" />
                     </a>
                   </Button>
-                  <AlertDialog>
-                    <AlertDialogTrigger asChild>
-                      <Button
-                        size={'icon'}
-                        variant={'outline'}
-                        className="size-8"
-                      >
-                        <TrashIcon className="size-4 text-destructive" />
-                      </Button>
-                    </AlertDialogTrigger>
-                    <AlertDialogContent>
-                      <AlertDialogHeader>
-                        <AlertDialogTitle>
-                          درخواست را حذف میکنید؟
-                        </AlertDialogTitle>
-                        <AlertDialogDescription>
-                          آیا درخواست ارسال شده به این آگهی شغلی را حذف میکنی؟
-                        </AlertDialogDescription>
-                      </AlertDialogHeader>
-                      <AlertDialogFooter>
-                        <AlertDialogCancel>انصراف</AlertDialogCancel>
-                        <AlertDialogAction>حذفش کن</AlertDialogAction>
-                      </AlertDialogFooter>
-                    </AlertDialogContent>
-                  </AlertDialog>
+                  <DeleteReport id={r.id} />
                 </div>
               </TableCell>
             </TableRow>

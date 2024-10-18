@@ -79,7 +79,7 @@ export const useAddReport = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: ReportSchema) => {
-      const res = await fetch(`/api/jobs/${data.jobId}/report`, {
+      const res = await fetch(`/api/reports/${data.jobId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
